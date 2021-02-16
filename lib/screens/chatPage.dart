@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat/models/chatUsersModel.dart';
+import 'package:flutter_chat/widgets/conversationList.dart';
 
 class ChatPage extends StatefulWidget{
   @override
@@ -25,6 +26,7 @@ class _ChatPageState extends State<ChatPage> {
     ChatUsers(name: "John Wick", messageText: "How are you?",
         imageUrl: "images/userImage8.jpeg", time: "18 Feb"),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,6 +85,21 @@ class _ChatPageState extends State<ChatPage> {
                   )
                 )
               )
+            ),
+            ListView.builder(
+              itemCount: chatUsers.length,
+                shrinkWrap: true,
+                padding: EdgeInsets.only(top:16),
+                physics: NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index){
+                return ConversationList(
+                    name: chatUsers[index].name,
+                    messageText: chatUsers[index].messageText,
+                    imageUrl: chatUsers[index].messageText,
+                    time: chatUsers[index].time,
+                    isMessageRead: (index == 0 || index == 3)?true:false,
+                );
+              }
             ),
           ],
         ),
