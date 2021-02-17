@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_chat/models/chatMessageModel.dart';
 
 class ChatDetailPage extends StatefulWidget{
 
@@ -7,6 +8,16 @@ class ChatDetailPage extends StatefulWidget{
 }
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
+
+  List<ChatMessage> messages = [
+    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
+    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
+    ChatMessage(messageContent: "Hey Kriss, I am doing fine dude. wbu?",
+        messageType: "sender"),
+    ChatMessage(messageContent: "ehh, doing OK.", messageType: "receiver"),
+    ChatMessage(messageContent: "Is there anything wrong?",
+        messageType: "receiver"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +67,19 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
       ),
       body: Stack(
         children: <Widget>[
+          ListView.builder(
+            itemCount: messages.length,
+            shrinkWrap: true,
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index){
+              return Container(
+                padding: EdgeInsets.only(left: 16, right: 16,
+                top: 10, bottom: 10),
+                child: Text(messages[index].messageContent),
+              );
+            },
+          ),
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
